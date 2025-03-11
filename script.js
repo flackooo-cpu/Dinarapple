@@ -73,10 +73,14 @@ function nextLevel() {
     for (let i = 0; i < 5; i++) {
         const apple = document.createElement("div");
         apple.classList.add("apple");
-        apple.innerHTML = "?";  
 
+        // Check if it's the winning apple
         if (i === winningIndex) {
             apple.dataset.winning = "true";
+            apple.innerHTML = "<img src='images/apple.png' alt='Apple' />";  // Winning apple
+        } else {
+            apple.innerHTML = "<img src='images/bad-apple.png' alt='Bad Apple' />";  // Bad apple
+            apple.classList.add("bad-apple");  // Optional: special class for bad apples
         }
 
         gameBoard.appendChild(apple);
@@ -92,13 +96,9 @@ generateBtn.addEventListener("click", () => {
     apples.forEach(apple => {
         if (!revealed && apple.dataset.winning === "true") {
             apple.classList.add("revealed");
-            apple.innerHTML = "🍏";
+            apple.innerHTML = "<img src='images/apple.png' alt='Apple' />";  // Winning apple shown
             revealed = true;
         }
     });
 
-    setTimeout(() => {
-        currentLevel++;
-        nextLevel();
-    }, 1000);
-});
+   
